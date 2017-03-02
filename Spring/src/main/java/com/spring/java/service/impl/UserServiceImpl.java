@@ -17,33 +17,35 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public User getUser(Integer userid) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Inside UserServiceImpl getUser() user ID::"+userid);
+		return userDao.getUser(userid);
 	}
 
 	public List<User> usersList() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Inside UserServiceImpl usersList()");
+		return userDao.usersList();
 	}
 
 	public void deleteUser(Integer userid) {
-		// TODO Auto-generated method stub
+		userDao.deleteUser(userid);
 		
 	}
 
 	public void updateUser(Integer userid, User user) {
-		// TODO Auto-generated method stub
+		userDao.updateUser(userid, user);
 		
 	}
 
-	public UserDao getUserDao() {
+	/*public UserDao getUserDao() {
 		return userDao;
 	}
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}*/
+	
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
 	}
-	
-	
 
 }

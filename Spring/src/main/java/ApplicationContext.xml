@@ -4,6 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
 <bean id="helloWorld" class="com.spring.java.service.impl.HelloworldImpl" scope="singleton">
 <property name="message" value="Hello Spring world......."></property>
 </bean>
@@ -12,5 +13,85 @@
 <property name="message" value="Destryin bean...."></property>
 
 </bean>
+
+<bean id="postProcess" class="com.spring.java.service.impl.InitBeanPostProcess"></bean>
+
+
+<bean id="beanTemplate" abstract="true">
+<property name="message1" value="Hello World!!!"></property>
+<property name="message2" value="Second hellow world!!!!"></property>
+<property name="message3" value="Namaste India!!!!"></property>
+</bean>
+
+
+<bean id="helloworld" class="com.spring.java.service.impl.HelloWorld">
+<property name="message1" value="World Message1....."></property>
+<property name="message2" value="World Message2....."></property>
+
+</bean>
+
+<bean id="helloIndia" class="com.spring.java.service.impl.HelloIndia" parent="helloworld">
+<property name="message1" value="India message1....."></property>
+<property name="message3" value="India message3....."></property>
+</bean>
+
+<bean id="helloIndia2" class="com.spring.java.service.impl.HelloIndia" parent="beanTemplate">
+<property name="message1" value="Hello India..."></property>
+<property name="message3" value="Namaste India...."></property>
+</bean>
+
+<bean id="spellChecker" class="com.spring.java.dependency.injection.SpellChecker"></bean>
+<bean id="textEditor" class="com.spring.java.dependency.injection.TextEditor">
+<constructor-arg ref="spellChecker"></constructor-arg>
+</bean>
+
+<bean id="textEditor2" class="com.spring.java.dependency.injection.TextEditor2">
+<property name="spellChecker" ref="spellChecker"></property>
+</bean>
+<bean id="textEditor3" class="com.spring.java.dependency.injection.TextEditor3">
+<property name="spellChecker">
+<bean id="spellChecker1" class="com.spring.java.dependency.injection.SpellChecker"/>
+</property>
+</bean>
+<bean id="collections" class="com.spring.java.dependency.injection.CollectionsInjection">
+<property name="countries">
+<list>
+<value>India</value>
+<value>USA</value>
+</list>
+</property>
+<property name="states">
+<set>
+<value>Andhra Pradesh</value>
+<value>North Carolina</value>
+<value>Ohio</value>
+</set>
+</property>
+<property name="cities">
+<map>
+<entry key="Ohio" value="Miamisburg"></entry>
+<entry key="AP" value="Ongole"></entry>
+<entry key="NC" value="Charlotte"></entry>
+</map>
+</property>
+<property name="addressProps">
+<props>
+<prop key="one">India</prop>
+<prop key="two">USA</prop>
+<prop key="three">Canada</prop>
+</props>
+</property>
+</bean>
+
+<!-- Auto wiring  -->
+<bean id="te" class="com.spring.autowire.TextEditor" autowire="byName">
+<property name="message" value="Autowiring....."></property>
+</bean>
+<bean id="checker" class="com.spring.autowire.SpellChecker"></bean>
+
+<bean id="te2" class="com.spring.autowire.TextEditor" autowire="byType">
+<property name="message" value="Generic Text editor....."></property>
+</bean>
+
 
 </beans>
